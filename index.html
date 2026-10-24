@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YugNiti — The world, explained.</title>
+<meta name="description" content="YugNiti is an independent media initiative exploring geopolitics, global affairs, technology, artificial intelligence, and strategic thinking.">
+<meta name="theme-color" content="#faf8f3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf8f3'/%3E%3Cpath d='M7 8l6 9v7M19 8l-6 9M17 24V8l8 16V8' fill='none' stroke='%237a1f2e' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ CSS ============ */
+:root{
+  --paper:#ffffff;
+  --ivory:#faf8f3;
+  --ink:#1d1d1f;
+  --charcoal:#4a4a4e;
+  --muted:#76767b;
+  --rule:#e3ded3;
+  --burgundy:#7a1f2e;
+  --serif:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Instrument Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --wrap:1180px;
+  --pad:clamp(20px,5vw,56px);
+  --hdr:76px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--hdr);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+a{color:inherit}
+img,svg{max-width:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+:focus-visible{outline:2px solid var(--burgundy);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;text-decoration:none;transition:top .2s}
+.skip:focus{top:12px}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,box-shadow .3s}
+.site-header.scrolled{background:rgba(255,255,255,.96);border-bottom-color:var(--rule)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:var(--hdr);transition:height .3s}
+.site-header.scrolled{--hdr:64px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:38px;height:38px;flex:none}
+.wordmark{font-family:var(--serif);font-size:25px;font-weight:500;letter-spacing:-.01em;line-height:1}
+.wordmark i{font-style:normal;color:var(--burgundy)}
+.ic{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.nav ul{display:flex;gap:.2rem;list-style:none;margin:0;padding:.3rem;border:1px solid var(--rule);border-radius:999px;background:rgba(250,248,243,.92)}
+.nav a{display:flex;align-items:center;gap:.5rem;padding:.6rem 1.05rem;border-radius:999px;font-size:.9rem;font-weight:500;text-decoration:none;color:var(--charcoal);transition:background .25s,color .25s}
+.nav a .ic{width:1rem;height:1rem;color:var(--burgundy);transition:color .25s,transform .3s}
+.nav small{display:none}
+.nav a:hover{background:#fff;color:var(--ink)}
+.nav a:hover .ic{transform:translateY(-2px)}
+.nav a.active{background:var(--burgundy);color:#fff}
+.nav a.active .ic{color:#fff}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--burgundy)}
+.menu-btn{display:none;background:none;border:1px solid var(--rule);width:44px;height:44px;cursor:pointer;color:var(--ink);align-items:center;justify-content:center}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:18px;height:1.5px;background:currentColor;position:relative;transition:transform .3s,background .2s}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 15px/1 var(--sans);padding:16px 26px;text-decoration:none;border:1px solid var(--ink);cursor:pointer;transition:background .25s,color .25s,border-color .25s;background:none;color:var(--ink)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--burgundy);border-color:var(--burgundy)}
+.btn-ghost:hover{border-color:var(--burgundy);color:var(--burgundy)}
+.btn svg{width:16px;height:16px;transition:transform .25s}
+.btn:hover svg{transform:translateY(2px)}
+.btn.up:hover svg{transform:translateY(-2px)}
+
+/* Sections */
+section{position:relative}
+.sec{padding:clamp(80px,12vw,150px) 0}
+.ivory{background:var(--ivory)}
+.rule-top{border-top:1px solid var(--rule)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:1.08}
+h2{font-size:clamp(34px,5vw,60px)}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--burgundy);margin-bottom:28px}
+.lede{font-family:var(--serif);font-size:clamp(20px,2.1vw,25px);line-height:1.55;color:var(--charcoal)}
+
+/* Hero */
+.hero{min-height:calc(100svh - 4.75rem);display:flex;align-items:center;padding:clamp(2.5rem,7vw,6rem) 0 clamp(4rem,10vw,8rem);overflow:hidden}
+.hero>.wrap{width:100%}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,6vw,90px);align-items:center}
+.hero h1{font-size:clamp(46px,7.2vw,92px);letter-spacing:-.03em;line-height:1.02}
+.hero .lede{margin-top:32px;max-width:520px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px}
+.hero-art{position:relative;aspect-ratio:1/1;width:100%;max-width:560px;justify-self:end}
+.hero-art svg{width:100%;height:100%;display:block}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s cubic-bezier(.4,0,.2,1) forwards}
+.draw.d2{animation-delay:.4s}.draw.d3{animation-delay:.8s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.node{opacity:0;animation:pop .6s ease forwards}
+@keyframes pop{to{opacity:1}}
+.orbit{transform-origin:250px 250px;animation:spin 70s linear infinite reverse}
+.flow{stroke-dasharray:4 10;animation:flow 14s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-140}}
+.pulse{transform-origin:center;transform-box:fill-box;animation:pulse 3.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.35}50%{transform:scale(1.9);opacity:0}}
+
+/* What */
+.split{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,7vw,110px)}
+.split h2{position:sticky;top:110px;align-self:start}
+.prose p+p{margin-top:1.4em}
+.prose .lede:first-child::first-letter{font-size:3.3em;float:left;line-height:.85;padding:.08em .1em 0 0;color:var(--burgundy)}
+.prose p{max-width:60ch}
+
+/* Why */
+.why-head{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,7vw,110px);align-items:start}
+.why-head .prose p{font-size:18px;color:var(--charcoal)}
+.principles{list-style:none;margin:clamp(56px,8vw,100px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.principles li{padding:32px clamp(0px,2.4vw,32px) 8px 0}
+.principles li+li{padding-left:clamp(0px,2.4vw,32px);border-left:1px solid var(--rule)}
+.num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--burgundy);display:block;margin-bottom:22px}
+.principles h3{font-size:clamp(24px,2.5vw,30px);margin-bottom:14px;letter-spacing:-.01em;line-height:1.2}
+.principles li{transition:background .3s}
+.principles li:hover{background:var(--ivory)}
+.principles li:hover .num{letter-spacing:.08em}
+.num{transition:letter-spacing .3s}
+.principles p{color:var(--charcoal);font-size:16px}
+
+/* Chips, focus, questions */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.25rem}
+.chip{display:inline-flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:500;color:var(--charcoal);border:1px solid var(--rule);padding:.4rem .8rem;border-radius:999px;background:var(--ivory)}
+.chip .ic{width:.9rem;height:.9rem;color:var(--burgundy)}
+.focus-grid{list-style:none;margin:clamp(2.5rem,6vw,5rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.focus-grid li{background:var(--paper);padding:clamp(1.5rem,3vw,2.5rem);transition:background .3s}
+.focus-grid li:hover{background:var(--ivory)}
+.ibox{display:grid;place-items:center;width:3rem;height:3rem;border:1px solid var(--rule);color:var(--burgundy);margin-bottom:1.5rem;transition:background .3s,color .3s,border-color .3s}
+.ibox .ic{width:1.35rem;height:1.35rem}
+.focus-grid li:hover .ibox{background:var(--burgundy);color:#fff;border-color:var(--burgundy)}
+.focus-grid h3{font-size:clamp(1.4rem,2.2vw,1.75rem);margin-bottom:.6rem;line-height:1.2}
+.focus-grid p{color:var(--charcoal);font-size:.98rem}
+.principles.four{grid-template-columns:repeat(4,1fr)}
+.qs{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.qs li{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.2;letter-spacing:-.01em;padding:1.4rem 0;border-bottom:1px solid var(--rule);transition:color .3s,padding-left .3s}
+.qs li:hover{color:var(--burgundy);padding-left:.75rem}
+
+/* Vision */
+.vision{overflow:hidden}
+.vision-grid{display:grid;grid-template-columns:7fr 5fr;gap:clamp(32px,6vw,90px);align-items:center}
+.vision h2{font-size:clamp(40px,6vw,78px);margin-bottom:36px}
+.vision .lede{max-width:56ch}
+.vision-art{aspect-ratio:1/1;width:100%;max-width:420px;justify-self:end}
+.vision-art svg{width:100%;height:100%;display:block}
+.orbit{transform-origin:250px 250px}
+.ring{transform-origin:center;transform-box:fill-box;animation:ring 7s ease-out infinite;opacity:0}
+.ring.r2{animation-delay:3.5s}
+@keyframes ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(6);opacity:0}}
+.spin{transform-origin:200px 200px;animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Co-founder */
+.profile{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,7vw,110px);align-items:center}
+.portrait{margin:0;width:100%;max-width:28.75rem;position:relative}
+.portrait::before{content:"";position:absolute;inset:1rem -1rem -1rem 1rem;border:1px solid var(--burgundy);z-index:0;pointer-events:none}
+.portrait img{position:relative;z-index:1;display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center top;background:var(--ivory)}
+.profile h2{margin-bottom:.625rem;letter-spacing:.02em;font-size:clamp(2rem,4.5vw,3.5rem)}
+.role{color:var(--burgundy);font-weight:500;margin-bottom:34px;padding-bottom:34px;border-bottom:1px solid var(--rule)}
+.profile .lede{max-width:54ch}
+
+/* Closing */
+.closing{text-align:center;padding:clamp(90px,13vw,170px) 0 clamp(80px,11vw,140px)}
+.closing h2{font-size:clamp(38px,6.4vw,84px);max-width:15ch;margin:0 auto 28px}
+.closing p{font-family:var(--serif);font-size:clamp(19px,2vw,24px);color:var(--charcoal);margin-bottom:48px}
+.ornament{width:1px;height:70px;background:var(--burgundy);margin:0 auto 40px}
+
+/* Footer */
+footer{border-top:1px solid var(--rule);background:var(--ivory);padding:56px 0 36px}
+.foot{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start}
+.foot .tag{font-family:var(--serif);font-style:italic;color:var(--charcoal);margin-top:14px;font-size:18px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;gap:28px;flex-wrap:wrap}
+.foot a{text-decoration:none;font-size:15px;color:var(--charcoal)}
+.foot a:hover{color:var(--burgundy)}
+.copy{margin-top:44px;padding-top:22px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted)}
+
+/* Reveal */
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* Responsive */
+@media (max-width:960px){
+  .hero-grid,.split,.why-head,.vision-grid,.profile{grid-template-columns:1fr}
+  .hero-art{justify-self:center;max-width:440px;order:2}
+  .split h2{position:static}
+  .vision-art{justify-self:start;max-width:300px}
+  .principles,.principles.four{grid-template-columns:1fr}
+  .focus-grid{grid-template-columns:repeat(2,1fr)}
+  .principles li,.principles li+li{padding:28px 0;border-left:0}
+  .principles li+li{border-top:1px solid var(--rule)}
+  .menu-btn{display:inline-flex}
+  .nav{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--rule);max-height:0;overflow:hidden;visibility:hidden;transition:max-height .4s ease,visibility 0s .4s}
+  .nav.open{max-height:34rem;visibility:visible;transition:max-height .4s ease}
+  .nav ul{flex-direction:column;gap:0;padding:.5rem var(--pad) 1.25rem;border:0;border-radius:0;background:none}
+  .nav li+li{border-top:1px solid var(--rule)}
+  .nav a{padding:.85rem 0;gap:1rem;border-radius:0;font-family:var(--serif);font-size:1.2rem}
+  .nav a:hover{background:none}
+  .nav a .ic{width:2.6rem;height:2.6rem;padding:.7rem;border:1px solid var(--rule);border-radius:50%}
+  .nav small{display:block;font:400 .82rem var(--sans);color:var(--muted)}
+  .nav a.active{background:none;color:var(--burgundy)}
+  .nav a.active .ic{background:var(--burgundy);color:#fff;border-color:var(--burgundy)}
+  .site-header.menu-open{background:var(--paper)}
+}
+@media (min-width:1440px){:root{--wrap:1320px}body{font-size:18px}}
+@media (min-width:600px) and (max-width:960px){.hero{min-height:0}}
+@media (max-width:560px){
+  .focus-grid{grid-template-columns:1fr}
+  body{font-size:16px}
+  .btn{width:100%;justify-content:center}
+  .foot{grid-template-columns:1fr}
+  .wordmark{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .draw{stroke-dashoffset:0}
+  .node{opacity:1}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="#home" aria-label="YugNiti — home">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x=".75" y=".75" width="38.5" height="38.5" stroke="#1d1d1f" stroke-width="1.5"/>
+        <path d="M9 10l6 10v10M21 10l-6 10" stroke="#1d1d1f" stroke-width="1.8" stroke-linecap="square"/>
+        <path d="M20 30V10l11 20V10" stroke="#7a1f2e" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter"/>
+      </svg>
+      <span class="wordmark">Yug<i>Niti</i></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul>
+        <li><a href="#home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span class="lbl"><b>Home</b><small>Back to the start</small></span></a></li>
+        <li><a href="#purpose"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span class="lbl"><b>Our Purpose</b><small>Why YugNiti exists</small></span></a></li>
+        <li><a href="#focus"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="lbl"><b>Focus Areas</b><small>What we explore</small></span></a></li>
+        <li><a href="#vision"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="lbl"><b>Our Vision</b><small>Where we are headed</small></span></a></li>
+        <li><a href="#co-founder"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 5-7 8-7s7 2 8 7"/></svg><span class="lbl"><b>Co-founder</b><small>The person behind it</small></span></a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><span></span></button>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Independent thinking. Global perspectives.</p>
+      <h1 id="hero-title">The world is changing. Understanding it matters.</h1>
+      <p class="lede">YugNiti explores geopolitics, technology, and global affairs to help people understand not just what is happening, but why it matters.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#purpose">Discover Our Purpose
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <a class="btn btn-ghost" href="#co-founder">Meet the Co-founder</a>
+      </div>
+      <div class="chips" aria-label="Topics we explore"><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Geopolitics</span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>Technology</span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6.5l8 1M7 7.8l4 8.4M17 9.8l-4 6.4"/></svg>Artificial intelligence</span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Strategy</span></div>
+    </div>
+    <div class="hero-art" role="img" aria-label="Abstract monochrome illustration of intersecting lines, connected points and map contours">
+      <svg viewBox="0 0 500 500" fill="none" aria-hidden="true">
+        <circle cx="250" cy="250" r="236" stroke="#e3ded3"/>
+        <circle cx="250" cy="250" r="170" stroke="#e3ded3"/>
+        <circle cx="250" cy="250" r="104" stroke="#e3ded3"/>
+        <!-- meridians / parallels -->
+        <ellipse cx="250" cy="250" rx="236" ry="96" stroke="#d6d0c3"/>
+        <ellipse cx="250" cy="250" rx="96" ry="236" stroke="#d6d0c3"/>
+        <path d="M14 250H486M250 14V486" stroke="#d6d0c3"/>
+        <!-- contours -->
+        <path class="draw" pathLength="1" d="M92 196c22-34 58-44 88-34s46-6 70-22 64-8 82 16 52 22 62 52-14 46-38 54-32 36-66 38-48-20-78-14-60 26-86 4-46-30-50-62 0-24 16-32z" stroke="#1d1d1f" stroke-width="1.2"/>
+        <path class="draw d2" pathLength="1" d="M130 214c16-18 40-22 60-14s34-4 52-14 46-2 58 14 38 14 44 36-10 30-26 36-22 24-46 26-34-12-54-8-42 16-60 0-32-20-34-42 0-24 6-34z" stroke="#7a1f2e" stroke-width="1"/>
+        <path class="draw d3" pathLength="1" d="M176 244c12-10 28-12 42-6s24-2 36-8 32-2 40 10 26 10 28 26-8 20-18 24-16 14-32 14-24-8-38-6-28 8-38-2-22-14-22-28 0-18 2-22z" stroke="#1d1d1f" stroke-width=".9"/>
+        <g class="orbit" stroke="#7a1f2e" stroke-width="1" stroke-dasharray="3 7"><ellipse cx="250" cy="250" rx="200" ry="70" transform="rotate(-24 250 250)"/><circle class="sat" cx="450" cy="250" r="4" fill="#7a1f2e" stroke="none" transform="rotate(-24 250 250)"/></g>
+        <!-- network lines -->
+        <g stroke="#1d1d1f" stroke-width="1" stroke-linecap="round">
+          <path class="draw" pathLength="1" d="M96 150L190 120L322 150L404 232L360 340L240 392L126 340L96 150"/>
+          <path class="draw d2" pathLength="1" d="M190 120L360 340M322 150L126 340M96 150L404 232M240 392L240 120"/>
+          <path class="flow" stroke="#76767b" d="M96 150L322 150M126 340L360 340"/>
+        </g>
+        <path class="draw d3 flow" d="M60 400C140 330 220 300 250 250S360 150 450 100" stroke="#7a1f2e" stroke-width="1.4"/>
+        <!-- nodes -->
+        <g fill="#fff" stroke="#1d1d1f" stroke-width="1.4">
+          <circle class="node" style="animation-delay:.6s" cx="96" cy="150" r="5"/>
+          <circle class="node" style="animation-delay:.8s" cx="190" cy="120" r="5"/>
+          <circle class="node" style="animation-delay:1s" cx="322" cy="150" r="5"/>
+          <circle class="node" style="animation-delay:1.2s" cx="404" cy="232" r="5"/>
+          <circle class="node" style="animation-delay:1.4s" cx="360" cy="340" r="5"/>
+          <circle class="node" style="animation-delay:1.6s" cx="240" cy="392" r="5"/>
+          <circle class="node" style="animation-delay:1.8s" cx="126" cy="340" r="5"/>
+        </g>
+        <circle class="node" style="animation-delay:2s" cx="250" cy="250" r="7" fill="#7a1f2e"/>
+        <circle class="pulse" cx="250" cy="250" r="7" stroke="#7a1f2e"/>
+        <circle cx="450" cy="100" r="3.5" fill="#7a1f2e"/>
+        <circle cx="60" cy="400" r="3.5" fill="#7a1f2e"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PURPOSE ============ -->
+<section class="sec ivory rule-top" id="purpose" aria-labelledby="what-title">
+  <div class="wrap split">
+    <h2 id="what-title" class="reveal">What is YugNiti?</h2>
+    <div class="prose reveal">
+      <p class="lede">YugNiti is a growing media initiative built around curiosity, context, and clear explanations. It explores the forces shaping our world, from international relations and geopolitical competition to emerging technologies and artificial intelligence.</p>
+      <p class="lede">Its purpose is to make complex subjects easier to understand, encourage independent thinking, and connect global developments to the bigger picture.</p>
+      <p>It is written for students, professionals, and curious readers who want depth without jargon: people who would rather understand a subject properly than skim ten summaries of it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="sec" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="why-head">
+      <h2 id="why-title" class="reveal">Beyond the headlines.</h2>
+      <div class="prose reveal">
+        <p>In a world full of information, understanding can be harder to find. Headlines often tell us what happened, while the deeper context behind events can be overlooked.</p>
+        <p>YugNiti aims to explore those connections, ask better questions, and make important global developments more understandable. The goal is not to tell people what to think, but to give them more context to think for themselves.</p>
+      </div>
+    </div>
+    <ol class="principles reveal">
+      <li><span class="num">01</span><h3>Context over noise</h3><p>Explore the background and consequences behind major developments.</p></li>
+      <li><span class="num">02</span><h3>Curiosity over assumptions</h3><p>Approach complex subjects with thoughtful questions and an open mind.</p></li>
+      <li><span class="num">03</span><h3>Understanding over sensationalism</h3><p>Explain ideas clearly without unnecessary fear or exaggeration.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ FOCUS AREAS ============ -->
+<section class="sec ivory rule-top" id="focus" aria-labelledby="focus-title">
+  <div class="wrap">
+    <div class="why-head reveal">
+      <h2 id="focus-title">Where we look.</h2>
+      <div class="prose"><p class="lede">YugNiti follows a handful of subjects that increasingly shape one another. Each is approached with the same habit: slow down, add context, and explain clearly.</p></div>
+    </div>
+    <ul class="focus-grid reveal">
+      <li><span class="ibox"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><h3>Geopolitics</h3><p>How power, geography, alliances, and rivalry shape what nations do, and why they do it.</p></li>
+      <li><span class="ibox"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V10M9 21V10M15 21V10M19 21V10M2 10l10-6 10 6z"/></svg></span><h3>Global affairs</h3><p>The institutions, agreements, and tensions that connect countries, economies, and societies.</p></li>
+      <li><span class="ibox"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span><h3>Technology</h3><p>How tools and infrastructure change the way people live, work, and compete.</p></li>
+      <li><span class="ibox"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6.5l8 1M7 7.8l4 8.4M17 9.8l-4 6.4"/></svg></span><h3>Artificial intelligence</h3><p>What this fast-moving field may mean for economies, security, and everyday decisions.</p></li>
+      <li><span class="ibox"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><h3>Strategic thinking</h3><p>Ways of reasoning about choices, trade-offs, and long-term consequences.</p></li>
+      <li><span class="ibox"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg></span><h3>Ideas and society</h3><p>Where innovation meets culture, ethics, and the public interest.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ APPROACH ============ -->
+<section class="sec" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="why-head reveal">
+      <h2 id="how-title">How we think.</h2>
+      <div class="prose"><p>Understanding rarely arrives in one step. A simple, repeatable way of working keeps the focus on clarity rather than speed, and on questions rather than hot takes.</p></div>
+    </div>
+    <ol class="principles four reveal">
+      <li><span class="num">01</span><h3>Observe</h3><p>Notice what is happening, who is involved, and what is at stake.</p></li>
+      <li><span class="num">02</span><h3>Connect</h3><p>Link the event to its history, its economics, and the technology behind it.</p></li>
+      <li><span class="num">03</span><h3>Question</h3><p>Test assumptions and ask what the first version of the story leaves out.</p></li>
+      <li><span class="num">04</span><h3>Explain</h3><p>Put it in plain language, so the idea stays with the reader.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ QUESTIONS ============ -->
+<section class="sec ivory rule-top" aria-labelledby="q-title">
+  <div class="wrap split">
+    <h2 id="q-title" class="reveal">Questions we keep asking.</h2>
+    <ul class="qs reveal">
+      <li>What happened, and what led up to it?</li>
+      <li>Who benefits, and who bears the cost?</li>
+      <li>What is missing from the story so far?</li>
+      <li>What could happen next, and what would change it?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ VISION ============ -->
+<section class="sec rule-top vision" id="vision" aria-labelledby="vision-title">
+  <div class="wrap vision-grid">
+    <div class="reveal">
+      <p class="eyebrow">Our vision</p>
+      <h2 id="vision-title">Make the complex understandable.</h2>
+      <p class="lede">Our vision is to build a thoughtful platform where global affairs, technology, and strategic ideas become accessible to curious minds. YugNiti aims to encourage informed perspectives, deeper questions, and a better understanding of an increasingly connected world.</p>
+    </div>
+    <div class="vision-art reveal" role="img" aria-label="Abstract graphic of tangled lines resolving into a single clear line">
+      <svg viewBox="0 0 400 400" fill="none" aria-hidden="true">
+        <g class="spin" stroke="#cfc8b9" stroke-width="1">
+          <circle cx="200" cy="200" r="180"/>
+          <circle cx="200" cy="200" r="140" stroke-dasharray="2 6"/>
+          <ellipse cx="200" cy="200" rx="180" ry="70"/>
+          <ellipse cx="200" cy="200" rx="180" ry="70" transform="rotate(60 200 200)"/>
+          <ellipse cx="200" cy="200" rx="180" ry="70" transform="rotate(120 200 200)"/>
+        </g>
+        <circle class="ring" cx="200" cy="200" r="30" stroke="#7a1f2e"/>
+        <circle class="ring r2" cx="200" cy="200" r="30" stroke="#7a1f2e"/>
+        <path class="flow" d="M40 60L200 200L360 90M60 340L200 200L350 330" stroke="#76767b"/>
+        <path d="M20 200H380" stroke="#7a1f2e" stroke-width="1.6"/>
+        <circle cx="20" cy="200" r="4" fill="#fff" stroke="#1d1d1f" stroke-width="1.4"/>
+        <circle cx="380" cy="200" r="4" fill="#7a1f2e"/>
+        <circle cx="200" cy="200" r="30" fill="#faf8f3" stroke="#1d1d1f" stroke-width="1.2"/>
+        <circle cx="200" cy="200" r="5" fill="#1d1d1f"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CO-FOUNDER ============ -->
+<section class="sec ivory rule-top" id="co-founder" aria-labelledby="cofounder-title">
+  <div class="wrap profile">
+    <figure class="portrait reveal"><img src="OmPandey.png" alt="Om Pandey, Co-founder of YugNiti" width="800" height="1000" loading="lazy"></figure>
+    <div class="reveal">
+      <p class="eyebrow">The person behind the initiative</p>
+      <h2 id="cofounder-title">OM PANDEY</h2>
+      <p class="role">Co-founder, YugNiti</p>
+      <p class="lede">Om Pandey is a software developer interested in technology, global affairs, and the relationship between innovation and society. Through YugNiti, he aims to explore complex ideas and make meaningful global developments easier to understand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing rule-top" aria-labelledby="closing-title">
+  <div class="wrap reveal">
+    <div class="ornament" aria-hidden="true"></div>
+    <h2 id="closing-title">Stay curious. See the bigger picture.</h2>
+    <p>Because understanding the world begins with asking better questions.</p>
+    <button class="btn up" type="button" id="toTop">Back to top
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#home" aria-label="YugNiti — back to top"><span class="wordmark">Yug<i>Niti</i></span></a>
+        <p class="tag">The world, explained.</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#purpose">Our Purpose</a></li>
+          <li><a href="#vision">Our Vision</a></li>
+          <li><a href="#co-founder">Co-founder</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="copy">&copy; <span id="year">2026</span> YugNiti. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ============ JAVASCRIPT ============ */
+(function () {
+  var doc = document.documentElement;
+  doc.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Sticky header state
+  var header = document.querySelector('.site-header');
+  var bar = document.getElementById('progress');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+    var h = doc.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu
+  var btn = document.getElementById('menuBtn');
+  var nav = document.getElementById('nav');
+  function setMenu(open) {
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    nav.classList.toggle('open', open);
+    header.classList.toggle('menu-open', open);
+  }
+  btn.addEventListener('click', function () { setMenu(btn.getAttribute('aria-expanded') !== 'true'); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setMenu(false); btn.focus(); }
+  });
+  window.addEventListener('resize', function () { if (window.innerWidth > 960) setMenu(false); });
+
+  // Back to top
+  document.getElementById('toTop').addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    var h = document.querySelector('.brand'); if (h) h.focus({ preventScroll: true });
+  });
+
+  // Scroll reveal
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Active nav link
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  var map = links.map(function (a) { return { a: a, s: document.querySelector(a.getAttribute('href')) }; });
+  function setActive() {
+    var y = window.scrollY + 140, cur = map[0];
+    map.forEach(function (m) { if (m.s && m.s.offsetTop <= y) cur = m; });
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 4) cur = map[map.length - 1];
+    links.forEach(function (a) { var on = a === cur.a; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  setActive();
+  window.addEventListener('scroll', setActive, { passive: true });
+})();
+</script>
+</body>
+</html>
